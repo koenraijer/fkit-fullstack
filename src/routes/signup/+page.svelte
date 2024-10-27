@@ -1,7 +1,7 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-    import {auth, user, userData, docStore} from '$lib/firebase';
-    import { GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth';
+    import {auth, user } from '$lib/firebase';
+    import { signOut} from 'firebase/auth';
     import SignUp from '$lib/components/SignUp.svelte';
 
     // UI

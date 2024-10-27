@@ -94,7 +94,13 @@ function derived(stores, fn, initial_value) {
     };
   });
 }
+function readonly(store) {
+  return {
+    subscribe: store.subscribe.bind(store)
+  };
+}
 export {
+  readonly as a,
   derived as d,
   readable as r,
   writable as w

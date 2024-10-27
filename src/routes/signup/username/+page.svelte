@@ -1,9 +1,7 @@
 <script lang="ts">
     import AuthCheck from "$lib/components/AuthCheck.svelte";
-    import { db, user, userData, auth } from "$lib/firebase";
+    import { db, user, userData } from "$lib/firebase";
     import { doc, getDoc, writeBatch} from "firebase/firestore";
-    import { goto } from "$app/navigation";
-    import { signOut} from 'firebase/auth';
     
     // UI
     import { Button, buttonVariants } from "$lib/components/ui/button";

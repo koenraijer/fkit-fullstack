@@ -4,7 +4,7 @@ export const manifest = {
 	assets: new Set(["custom.png","favicon copy.png","favicon.png","github.png","linkedin.png","moth.gif","tiktok.png","twitter.png","user.png","youtube.png"]),
 	mimeTypes: {".png":"image/png",".gif":"image/gif"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.a234e387.js","app":"_app/immutable/entry/app.d711225f.js","imports":["_app/immutable/entry/start.a234e387.js","_app/immutable/chunks/scheduler.e4fe527f.js","_app/immutable/chunks/singletons.c557ba60.js","_app/immutable/chunks/index.10b7c612.js","_app/immutable/chunks/control.f5b05b5f.js","_app/immutable/chunks/parse.bee59afc.js","_app/immutable/entry/app.d711225f.js","_app/immutable/chunks/scheduler.e4fe527f.js","_app/immutable/chunks/index.bdfbb633.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.14719ac1.js","app":"_app/immutable/entry/app.ae014545.js","imports":["_app/immutable/entry/start.14719ac1.js","_app/immutable/chunks/scheduler.300f34fd.js","_app/immutable/chunks/singletons.c7069cad.js","_app/immutable/chunks/index.1479d0fd.js","_app/immutable/chunks/control.f5b05b5f.js","_app/immutable/entry/app.ae014545.js","_app/immutable/chunks/scheduler.300f34fd.js","_app/immutable/chunks/index.93d9ee7e.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
@@ -26,11 +26,18 @@ export const manifest = {
 				endpoint: null
 			},
 			{
-				id: "/api/signin",
-				pattern: /^\/api\/signin\/?$/,
+				id: "/dashboard",
+				pattern: /^\/dashboard\/?$/,
 				params: [],
-				page: null,
-				endpoint: () => import('./entries/endpoints/api/signin/_server.ts.js')
+				page: { layouts: [0,], errors: [1,], leaf: 5 },
+				endpoint: null
+			},
+			{
+				id: "/signin",
+				pattern: /^\/signin\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 6 },
+				endpoint: null
 			},
 			{
 				id: "/signup",
@@ -58,20 +65,6 @@ export const manifest = {
 				pattern: /^\/([^/]+?)\/?$/,
 				params: [{"name":"username","optional":false,"rest":false,"chained":false}],
 				page: { layouts: [0,], errors: [1,], leaf: 4 },
-				endpoint: null
-			},
-			{
-				id: "/[username]/bio",
-				pattern: /^\/([^/]+?)\/bio\/?$/,
-				params: [{"name":"username","optional":false,"rest":false,"chained":false}],
-				page: { layouts: [0,], errors: [1,], leaf: 5 },
-				endpoint: null
-			},
-			{
-				id: "/[username]/edit",
-				pattern: /^\/([^/]+?)\/edit\/?$/,
-				params: [{"name":"username","optional":false,"rest":false,"chained":false}],
-				page: { layouts: [0,], errors: [1,], leaf: 6 },
 				endpoint: null
 			}
 		],

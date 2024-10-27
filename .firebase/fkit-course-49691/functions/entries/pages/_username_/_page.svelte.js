@@ -1,5 +1,16 @@
-import { c as create_ssr_component, e as escape, a as add_attribute, b as each, v as validate_component } from "../../../chunks/ssr.js";
-import { U as UserLink } from "../../../chunks/UserLink.js";
+import { c as create_ssr_component, f as add_attribute, j as escape, i as each, v as validate_component } from "../../../chunks/ssr.js";
+const UserLink = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { icon = "default" } = $$props;
+  let { url = "foo" } = $$props;
+  let { title = "some cool title" } = $$props;
+  if ($$props.icon === void 0 && $$bindings.icon && icon !== void 0)
+    $$bindings.icon(icon);
+  if ($$props.url === void 0 && $$bindings.url && url !== void 0)
+    $$bindings.url(url);
+  if ($$props.title === void 0 && $$bindings.title && title !== void 0)
+    $$bindings.title(title);
+  return `<a${add_attribute("href", url, 0)} class="stack w-full max-w-md text-center bg-base-300 flex justify-center items-center p-4 rounded-lg not-prose no-underline"><img${add_attribute("src", `/${icon}.png`, 0)}${add_attribute("alt", icon, 0)} width="32" height="32" class="w-8"> <span class="text-lg text-white font-bold">${escape(title)}</span></a>`;
+});
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0)

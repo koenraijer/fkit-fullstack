@@ -43,12 +43,6 @@ function error(status, body) {
   }
   return new HttpError(status, body);
 }
-function redirect(status, location) {
-  if (isNaN(status) || status < 300 || status > 308) {
-    throw new Error("Invalid status code");
-  }
-  return new Redirect(status, location);
-}
 function json(data, init) {
   const body = JSON.stringify(data);
   const headers = new Headers(init?.headers);
@@ -74,16 +68,11 @@ function text(body, init) {
     headers
   });
 }
-function fail(status, data) {
-  return new ActionFailure(status, data);
-}
 export {
   ActionFailure as A,
   HttpError as H,
   Redirect as R,
   error as e,
-  fail as f,
   json as j,
-  redirect as r,
   text as t
 };

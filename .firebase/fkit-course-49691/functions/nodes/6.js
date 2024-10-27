@@ -1,7 +1,7 @@
 
 
 export const index = 6;
-export const component = async () => (await import('../entries/pages/_username_/edit/_page.svelte.js')).default;
-export const imports = ["_app/immutable/nodes/6.26ea2a16.js","_app/immutable/chunks/scheduler.e4fe527f.js","_app/immutable/chunks/index.bdfbb633.js","_app/immutable/chunks/UserLink.19c93fd7.js","_app/immutable/chunks/stores.f8473358.js","_app/immutable/chunks/singletons.c557ba60.js","_app/immutable/chunks/index.10b7c612.js","_app/immutable/chunks/firebase.bfe19b46.js","_app/immutable/chunks/index.40b40403.js"];
-export const stylesheets = ["_app/immutable/assets/6.b43e781e.css"];
+export const component = async () => (await import('../entries/pages/signin/_page.svelte.js')).default;
+export const imports = ["_app/immutable/nodes/6.34b3d441.js","_app/immutable/chunks/scheduler.300f34fd.js","_app/immutable/chunks/index.93d9ee7e.js","_app/immutable/chunks/SignInWithGoogle.67ee453b.js","_app/immutable/chunks/firebase.ee006204.js","_app/immutable/chunks/index.1479d0fd.js","_app/immutable/chunks/index.72792d10.js","_app/immutable/chunks/input.0d01099c.js","_app/immutable/chunks/singletons.c7069cad.js","_app/immutable/chunks/utils.95524ed5.js","_app/immutable/chunks/button.a3f1943d.js","_app/immutable/chunks/card-title.f7eab975.js","_app/immutable/chunks/label.f429c1cf.js","_app/immutable/chunks/events.f0db0126.js"];
+export const stylesheets = [];
 export const fonts = [];
