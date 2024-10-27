@@ -7,6 +7,6 @@
    $userData; 
 </script>
 
-<div class="min-h-screen flex flex-col">
+<div class="min-h-screen overflow-x-hidden flex flex-col">
     <slot />
 </div>
