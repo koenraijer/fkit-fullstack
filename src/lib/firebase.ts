@@ -5,7 +5,13 @@ import { getStorage } from "firebase/storage";
 import { writable, type Readable, derived } from "svelte/store";
 
 const firebaseConfig = {
-
+  apiKey: "AIzaSyDV-BeFRXF9WQQyGxKBF8-P8lD46hi4FeQ",
+  authDomain: "fkit-course-49691.firebaseapp.com",
+  projectId: "fkit-course-49691",
+  storageBucket: "fkit-course-49691.appspot.com",
+  messagingSenderId: "30551221986",
+  appId: "1:30551221986:web:0013135ff3a594e51460bb",
+  measurementId: "G-HJJ3G45DEE"
 };
 
 // Initialize Firebase
