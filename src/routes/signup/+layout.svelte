@@ -1,31 +1,21 @@
 <script lang="ts">
-  import { page } from "$app/stores";
-  import AnimatedRoute from "$lib/components/AnimatedRoute.svelte";
-  import AuthCheck from "$lib/components/AuthCheck.svelte";
+    import {page} from '$app/stores';
+    import AnimatedRoute from '$lib/components/AnimatedRoute.svelte';
+    import { buttonVariants } from "$lib/components/ui/button";
 </script>
 
-<nav class="flex justify-center my-6">
-  <ul class="steps">
-    <a href="/signup" class="step step-primary">Sign In</a>
-    <a
-      href="/signup/username"
-      class="step"
-      class:step-primary={$page.route.id?.match(/username|photo/g)}>
-      Choose Username
-    </a>
-    <a
-      href="/signup/photo"
-      class="step"
-      class:step-primary={$page.route.id?.includes("photo")}>
-      Upload Photo
-    </a>
-  </ul>
-</nav>
-
-<AnimatedRoute>
-  <main class="card w-4/6 bg-neutral text-neutral-content mx-auto">
-    <div class="card-body items-center text-center">
-      <slot />
-    </div>
-  </main>
-</AnimatedRoute>
+<div class="max-w-md mx-auto">
+    <ul class="mt-8">
+        <a href="/signup" class="{ buttonVariants({ variant: 'secondary' })} ">Create Account</a>
+        <a href="/signup/username" class="{ $page.route.id?.match(/username|photo/g) ? buttonVariants({ variant: 'secondary' }) : buttonVariants({ variant: 'outline' }) }">Choose Username</a>
+        <a href="/signup/photo" class="{$page.route.id?.includes("photo") ? buttonVariants({variant: 'secondary'}) : buttonVariants({ variant: 'outline' })}">Upload Photo</a>
+    </ul>
+    
+    <AnimatedRoute>
+        <main class="my-8">
+            <div class="items-center text-center">
+                <slot></slot>
+            </div>
+        </main>
+    </AnimatedRoute>    
+</div>

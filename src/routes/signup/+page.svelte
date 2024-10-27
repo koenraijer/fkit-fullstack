@@ -1,44 +1,31 @@
 <script lang="ts">
-  import { auth, user } from "$lib/firebase";
+    import { goto } from '$app/navigation';
+    import {auth, user, userData, docStore} from '$lib/firebase';
+    import { GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth';
+    import SignUp from '$lib/components/SignUp.svelte';
 
-  import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+    // UI
+    import * as Card from '$lib/components/ui/card';
+    import { Button } from '$lib/components/ui/button';
 
-  async function signInWithGoogle() {
-    const provider = new GoogleAuthProvider();
-    const credential = await signInWithPopup(auth, provider);
-
-    const idToken = await credential.user.getIdToken();
-
-    const res = await fetch("/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // 'CSRF-Token': csrfToken  // HANDLED by sveltekit automatically
-      },
-      body: JSON.stringify({ idToken }),
-    });
-  }
-
-  async function signOutSSR() {
-    const res = await fetch("/api/signin", { method: "DELETE" });
-    await signOut(auth);
-  }
 </script>
 
-
-
-
-
-<h2>Login</h2>
-
 {#if $user}
-  <h2 class="card-title">Welcome, {$user.displayName}</h2>
-  <p class="text-center text-success">You are logged in</p>
-  <button class="btn btn-warning" on:click={signOutSSR}
-    >Sign out</button
-  >
+    <Card.Root class="w-full">
+        <Card.Header>
+        <Card.Title>Sign Up</Card.Title>
+        <Card.Description>Enter your information to create an account
+        </Card.Description>
+        </Card.Header>
+        <Card.Content class="my-10">
+            <h2>Welcome, <span class="font-bold">{$user.displayName}</span></h2>
+            <p>You are already logged in</p>
+        </Card.Content>
+        <Card.Footer class="border-t px-6 py-4 flex justify-between">
+            <Button variant="outline" on:click={() => signOut(auth)}>Sign Out</Button>
+            <Button variant="outline" on:click={() => goto('/signup/username')}>Next</Button>
+        </Card.Footer>
+    </Card.Root>
 {:else}
-  <button class="btn btn-primary" on:click={signInWithGoogle}
-    >Sign in with Google</button
-  >
+    <SignUp />
 {/if}
