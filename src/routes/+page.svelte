@@ -18,7 +18,7 @@
           {#if $userData?.username}
             <a href="/{$userData.username}/edit" class="btn btn-primary">Edit Profile</a>
           {:else}
-            <a href="/login" class="btn btn-primary">Get Started</a>
+            <a href="/signup" class="btn btn-primary">Get Started</a>
             <a href="/fireship" class="btn btn-secondary">Example Profile</a>
           {/if}
           <p class="py-6">Learn how to build this app from scratch in the <a class="link" href="https://fireship.io/courses/sveltekit">Full SvelteKit Course</a></p>
