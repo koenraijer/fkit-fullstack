@@ -27,8 +27,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@floating-ui/dom": "^1.6.11",
 		"firebase": "^9.23.0",
 		"firebase-admin": "^11.9.0",
+		"focus-trap": "^7.6.0",
 		"lucide-svelte": "^0.453.0"
 	}
 }

@@ -4,7 +4,7 @@ export const manifest = {
 	assets: new Set(["custom.png","favicon copy.png","favicon.png","github.png","linkedin.png","moth.gif","tiktok.png","twitter.png","user.png","youtube.png"]),
 	mimeTypes: {".png":"image/png",".gif":"image/gif"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.14719ac1.js","app":"_app/immutable/entry/app.ae014545.js","imports":["_app/immutable/entry/start.14719ac1.js","_app/immutable/chunks/scheduler.300f34fd.js","_app/immutable/chunks/singletons.c7069cad.js","_app/immutable/chunks/index.1479d0fd.js","_app/immutable/chunks/control.f5b05b5f.js","_app/immutable/entry/app.ae014545.js","_app/immutable/chunks/scheduler.300f34fd.js","_app/immutable/chunks/index.93d9ee7e.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.207d02f6.js","app":"_app/immutable/entry/app.455b8646.js","imports":["_app/immutable/entry/start.207d02f6.js","_app/immutable/chunks/scheduler.300f34fd.js","_app/immutable/chunks/singletons.e012b66c.js","_app/immutable/chunks/index.1479d0fd.js","_app/immutable/chunks/control.f5b05b5f.js","_app/immutable/entry/app.455b8646.js","_app/immutable/chunks/scheduler.300f34fd.js","_app/immutable/chunks/index.93d9ee7e.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			() => import('./nodes/0.js'),
 			() => import('./nodes/1.js'),
