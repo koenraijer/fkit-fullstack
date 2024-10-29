@@ -26,7 +26,7 @@
                             <span>Hi, {$user.displayName ?? $userData?.username ?? "user"}!</span>
                             <span class="text-sm text-neutral-500">
                                 <CalendarDays class="w-4 h-4 inline" />
-                                Joined {$user?.metadata?.createdAt ? new Date($user.metadata.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : ""}
+                                Joined October 2024. <!-- {$user?.metadata?.createdAt ? new Date($user.metadata.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : ""} --> 
                             </span>
                         </HoverCard.Content>
                     </HoverCard.Root>
