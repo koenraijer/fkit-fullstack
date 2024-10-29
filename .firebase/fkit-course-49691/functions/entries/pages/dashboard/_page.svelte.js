@@ -22,8 +22,10 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let isAvailable = false;
   let $$settled;
   let $$rendered;
+  let previous_head = $$result.head;
   do {
     $$settled = true;
+    $$result.head = previous_head;
     isValid = username?.length > 2 && username.length < 16 && re.test(username);
     isTouched = username.length > 0;
     $$rendered = `<h2 class="card-title mb-8" data-svelte-h="svelte-romd70">Dashboard</h2> ${validate_component(AuthCheck, "AuthCheck").$$render($$result, {}, {}, {

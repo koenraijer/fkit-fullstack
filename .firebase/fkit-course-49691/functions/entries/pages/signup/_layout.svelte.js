@@ -12,7 +12,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $page, $$unsubscribe_page;
   $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_page();
-  return `<div class="max-w-md mx-auto"><ul class="mt-8"><a href="/signup" class="${escape(buttonVariants({ variant: "secondary" }), true) + ""}">Create Account</a> <a href="/signup/username"${add_attribute(
+  return `<div class="max-w-md mx-auto"><ul class="mt-8"><a href="/signup" class="${escape(buttonVariants({ variant: "secondary" }), true) + ""}" data-svelte-h="svelte-1hw6vwh">Create Account</a> <a href="/signup/username"${add_attribute(
     "class",
     $page.route.id?.match(/username|photo/g) ? buttonVariants({ variant: "secondary" }) : buttonVariants({ variant: "outline" }),
     0

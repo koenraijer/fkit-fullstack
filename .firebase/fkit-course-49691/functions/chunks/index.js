@@ -27,6 +27,16 @@ class Redirect {
     this.location = location;
   }
 }
+class NotFound extends Error {
+  /**
+   * @param {string} pathname
+   */
+  constructor(pathname) {
+    super();
+    this.status = 404;
+    this.message = `Not found: ${pathname}`;
+  }
+}
 class ActionFailure {
   /**
    * @param {number} status
@@ -61,7 +71,12 @@ const encoder = new TextEncoder();
 function text(body, init) {
   const headers = new Headers(init?.headers);
   if (!headers.has("content-length")) {
-    headers.set("content-length", encoder.encode(body).byteLength.toString());
+    const encoded = encoder.encode(body);
+    headers.set("content-length", encoded.byteLength.toString());
+    return new Response(encoded, {
+      ...init,
+      headers
+    });
   }
   return new Response(body, {
     ...init,
@@ -71,6 +86,7 @@ function text(body, init) {
 export {
   ActionFailure as A,
   HttpError as H,
+  NotFound as N,
   Redirect as R,
   error as e,
   json as j,

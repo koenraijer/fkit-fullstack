@@ -58,10 +58,10 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
             {},
             {
               default: () => {
-                return `<a href="/signup/username"${add_attribute("class", buttonVariants({ variant: "outline" }), 0)}>Back</a> <button class="${[
+                return `<a href="/signup/username"${add_attribute("class", buttonVariants({ variant: "outline" }), 0)} data-svelte-h="svelte-1hrzrv2">Back</a> <button class="${[
                   escape(buttonVariants({ variant: "outline" }), true),
                   !$user ? "btn-disabled" : ""
-                ].join(" ").trim()}">Finish</button>`;
+                ].join(" ").trim()}" data-svelte-h="svelte-35bjim">Finish</button>`;
               }
             }
           )}`;

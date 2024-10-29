@@ -6,6 +6,10 @@
       "**/.*",
       "**/node_modules/**"
     ],
+    "predeploy": [
+      "npm install",
+      "./build.sh"
+    ],
     "frameworksBackend": {
       "region": "europe-west1"
     }
