@@ -1,53 +1,92 @@
 <script lang="ts">
     import "../app.css";
-    import {user, userData} from '$lib/firebase';
-
+    import {user, userData, auth} from '$lib/firebase';
+    import {info} from '$lib/info'
+    import { signOut} from 'firebase/auth';
+    import { goto } from '$app/navigation';
+    import { page } from '$app/stores';
+    
     // UI 
     import { Button } from "$lib/components/ui/button";
-    import * as HoverCard from "$lib/components/ui/hover-card";
-    import { CalendarDays } from 'lucide-svelte';
-    import * as Tooltip from "$lib/components/ui/tooltip";
-
-    $user;
-    $userData;
+    import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
+    import { LogOut } from 'lucide-svelte';
+    import { Settings } from 'lucide-svelte';
+    import { Toaster } from "$lib/components/ui/sonner";
+    import * as Avatar from "$lib/components/ui/avatar";
+    import { ModeWatcher } from "mode-watcher";
+    import LightSwitch from "$lib/components/LightSwitch.svelte";
 
 </script>
 
-<div class="mx-10 my-4">
-    <nav class="w-full">
-        <div class="flex justify-between items-center py-4">
-            <a href="/" class="text-2xl font-bold uppercase">Fullstack</a>
-            <div class="flex w-fit gap-4 items-center">
-                {#if $user}
+<!-- Initialisations -->
+<ModeWatcher />
+<Toaster closeButton richColors />
 
-                    <HoverCard.Root>
-                        <HoverCard.Trigger><h2 class="font-bold hover:underline">{$userData?.username ? "@" : ""}{$userData?.username ?? ""}</h2></HoverCard.Trigger>
-                        <HoverCard.Content class="flex flex-col gap-2">
-                            <span>Hi, {$user.displayName ?? $userData?.username ?? "user"}!</span>
-                            <span class="text-sm text-neutral-500">
-                                <CalendarDays class="w-4 h-4 inline" />
-                                Joined October 2024. <!-- {$user?.metadata?.createdAt ? new Date($user.metadata.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : ""} --> 
-                            </span>
-                        </HoverCard.Content>
-                    </HoverCard.Root>
-                    
-                    <Tooltip.Root>
-                        <Tooltip.Trigger>
-                            <a href="/dashboard"><img src={$userData?.photoURL ?? "/user.jpeg"} alt="profile" class="rounded-full w-8 h-8" /></a>
-                        </Tooltip.Trigger>
-                        <Tooltip.Content>
-                          <p>Dashboard</p>
-                        </Tooltip.Content>
-                    </Tooltip.Root>
-                {:else}
-                    <a href="/signin" class="hover:underline">Sign In</a>
-                    <Button variant="default" href="/signup">Sign Up</Button>
-                {/if}
-            </div>
+<!-- UI -->
+<nav class="w-full !z-20 relative p-4 sm:p-6 border-muted-foreground/25 {($page.route.id === "/login" || $page.route.id.includes("/signup")) ? "sm:block hidden" : ""} {($page.route.id === "/login" || $page.route.id.includes("/signup") || $page.route.id === "/") ? "" : "block border-b"}">
+    <div class="flex items-center {($page.route.id === '/login' || $page.route.id?.includes('/signup')) ? "justify-end sm:justify-between" : "justify-between"}">
+        <div class="{($page.route.id === '/login' || $page.route.id?.includes('/signup')) ? "hidden sm:block" : ""}">
+          <a href="/" class="text-2xl font-semibold ">{info.name}</a>
         </div>
-    </nav>
-    
-    <div class="min-h-screen flex flex-col">
-        <slot></slot>
+        <div class="flex w-fit gap-4 items-center group">
+            {#if !$user && !($page.route.id === '/login') && !($page.route.id === '/signup')}
+                <Button variant="default" href="/login" class="{($page.route.id === '/login' || $page.route.id?.includes('/signup')) ? "hidden sm:block" : ""}">Log In / Register</Button>
+            {:else if $user && $userData?.username && $userData?.passwordLastUpdated}
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger asChild let:builder>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  class="overflow-hidden rounded-full"
+                  builders={[builder]}
+                >
+                  <Avatar.Root class="rounded-full w-8 h-8">
+                      <Avatar.Image src={$userData?.photoURL} alt="avatar" />
+                      <Avatar.Fallback>
+                          <img src="/user.jpeg" alt="avatarFallback">
+                      </Avatar.Fallback>
+                  </Avatar.Root>
+                </Button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content align="end">
+                    <div class="py-3 px-4 flex items-center justify-start gap-3">
+                        <Avatar.Root class="hidden h-9 w-9 sm:flex">
+                            <Avatar.Image src={$userData?.photoURL} alt="avatar" />
+                            <Avatar.Fallback>
+                                <img src="/user.jpeg" alt="avatarFallback">
+                            </Avatar.Fallback>
+                        </Avatar.Root>
+                        <div class="flex flex-col gap-1 justify-start w-fit">
+                            <p class="text-sm font-medium leading-none w-fit">{$userData?.username ? "@" : ""}{$userData?.username ?? $user.displayName}</p>
+                            <p class="text-muted-foreground text-sm w-fit">{$user?.email}</p>
+                        </div>
+                    </div>
+                <DropdownMenu.Separator />
+                <DropdownMenu.Item>
+                  <a class="flex justify-between w-full items-center" href="/settings">
+                    Settings
+                    <DropdownMenu.Shortcut><Settings class="w-4 h-4 text-inherit inline"/>
+                    </DropdownMenu.Shortcut>
+                  </a>
+              </DropdownMenu.Item>
+                <DropdownMenu.Item><LightSwitch/></DropdownMenu.Item>
+                <DropdownMenu.Separator />
+                <DropdownMenu.Item>
+                  <button class="flex justify-between w-full items-center" on:click={() => {signOut(auth); goto('/')}}>
+                    <span>Sign Out</span>
+                    <DropdownMenu.Shortcut><LogOut class="w-4 h-4 text-inherit inline"/>
+                    </DropdownMenu.Shortcut>
+                  </button>
+
+                </DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+            {/if}
+        </div>
     </div>
+</nav>
+
+<div class="max-w-screen overflow-x-hidden">
+  <slot></slot>
 </div>
+

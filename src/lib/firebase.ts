@@ -20,7 +20,6 @@ export const db = getFirestore();
 export const auth = getAuth();
 export const storage = getStorage();
 
-
 /**
  * @returns a store with the current firebase user
  */
@@ -80,6 +79,14 @@ export function docStore<T>(
 
 interface UserData {
   username: string;
+  usernameLastUpdated: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  passwordLastUpdated: {
+    seconds: number;
+    nanoseconds: number;
+  },
   bio: string;
   photoURL: string;
   published: boolean;

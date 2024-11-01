@@ -60,3 +60,38 @@ export const flyAndScale = (
 		easing: cubicOut
 	};
 };
+
+// Verify signup
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase";
+import { toast } from "svelte-sonner";
+import { goto } from "$app/navigation";
+
+export async function resumeSignup(user: any, goTo?: string) {
+		const userDocRef = doc(db, `users/${user?.uid}`);
+        const userDoc = await getDoc(userDocRef);
+
+        if (!userDoc.exists()) {
+            // User document does not exist, redirect to signup
+            toast.success(`Welcome! Please complete your signup.`);
+            goto('/signup/username');
+			return;
+        } else {
+            const userData = userDoc.data();
+            if (!userData?.username) {
+                toast.success(`Welcome back! Please set your username.`);
+                goto('/signup/username');
+				return;
+            } else if (userData?.username && !userData?.passwordLastUpdated) {
+                toast.success(`Welcome back, @${userData?.username}. Please set a password for your account.`)
+				goto('/signup/password');
+				return;
+            } else if (userData?.username && userData?.passwordLastUpdated) {
+                toast.success(`Welcome back, @${userData?.username}.`);
+                if (goTo) {
+                    goto(goTo);
+                }
+				return;
+            }
+        }
+}
